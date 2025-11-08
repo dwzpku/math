@@ -1,0 +1,124 @@
+\documentclass[leqno,12pt]{article}
+\usepackage[a4paper,margin=0.5in,footskip=0.5in,bottom=0.75in]{geometry}
+\usepackage{authblk}
+\usepackage{amsrefs}
+\usepackage{graphicx,color}
+
+\makeatletter
+\DeclareSizeFunction{sub}{\sub@sfcnt\@font@info}
+\makeatother
+\usepackage{stix2}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{braket}
+
+\newcommand{\Emph}[1]{\textsf{\Large #1\ \ }}
+
+\usepackage{amsthm}
+\renewcommand{\qedsymbol}{\tiny$\blacksquare$}
+\newcommand{\noqed}{\renewcommand{\qed}{}}
+\newcommand*{\newqedtheoremstar}[1]{%
+  \AddToHook{env/#1/begin}{\pushQED{\qed}}%
+  \AddToHook{env/#1/end}{\popQED}%
+  \newtheorem*{#1}}
+\newcommand*{\newqedtheorem}[1]{%
+  \AddToHook{env/#1/begin}{\pushQED{\qed}}%
+  \AddToHook{env/#1/end}{\popQED}%
+  \newtheorem{#1}}
+\newtheoremstyle{plain}% name
+  {6pt}%        Space above
+  {6pt}%        Space below
+  {\normalfont}% Body font
+  {}%           Indent amount
+  {\bfseries}%  Head font
+  {.}%           Punctuation after head
+  {1.0em}%        Space after head
+  {\thmname{#1}\thmnumber{ #2}\thmnote{. \ \itshape #3}}% Head spec
+\newqedtheoremstar{definition}{Definition}
+\newqedtheorem{theorem}{Theorem}[section]
+
+\usepackage{titlesec}
+\titleformat{\section}{\sffamily\Huge}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\sffamily\bfseries\Large}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\sffamily\bfseries\large}{}{0pt}{}
+\usepackage[scheme=plain,UTF8]{ctex}
+
+\usepackage{hyperref}
+\begin{document}
+\title{初等数论笔记}
+\author{邓卫真}
+\affil{北京大学物理学院}
+\date{2025年11月6日开始}
+\maketitle
+
+\section{The Integers}
+
+\subsection{Numbers and Sequences}
+
+\subsubsection{Numbers}
+
+\Emph{The Well-Ordering Property} Every nonempty set of positive
+integers has a least element.
+
+\begin{definition}
+  The real number \(r\) is \emph{rational} if there are integers \(p\) and
+  \(q\), with \(q\ne0\), such that \(r=p/q\). If \(r\) is not rational, it is
+  said to be \emph{irrational}.
+\end{definition}
+
+\begin{theorem}
+  \(\sqrt2\) is irrational.
+\end{theorem}
+
+\begin{definition}
+  A number \(\alpha\) is \emph{algebraic} if it is the root of a polynomial with
+  integer coefficients; that is, \(\alpha\) is algebraic if there exist
+  integers \(a_0, a_1, \ldots, a_n\) such that
+  \(a_n\alpha^n+a_{n-1}\alpha^{n-1}+\cdots+a_0=0.\) The number
+  \(\alpha\) is called \emph{transcendental} if it is not algebraic.
+\end{definition}
+
+\subsubsection{The Greatest Integer Function}
+
+\begin{definition}
+  The \emph{greatest integer} in a real number \(x\), denoted by
+  \([x]\), is the largest integer less than or equal to \(x\). That is,
+  \([x]\) is the integer satisfying
+  \[
+    [x]\le x <[x]+1. \qedhere
+  \]
+\end{definition}
+
+\begin{definition}
+  The \emph{fractional part} of a real number \(x\), denoted by
+  \(\{x\}\), is the difference between \(x\) and the greatest integer in
+  \(x\), namely, \([x]\). That is, \(\{x\}=x-[x]\).
+\end{definition}
+
+\subsubsection{Diophantine Approximation}
+
+\begin{theorem}[The Pigeonhole Principle]
+  If \(k+1\) or more objects are placed into \(k\) boxes, then at least
+  one box contains two or more of the objects.
+\end{theorem}
+
+
+%%%%%%%%%%%%%%%%%%%%%% References %%%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{Rosen11}{book}{
+      author={Rosen, Kenneth H.},
+      title={Elementary Number Theory},
+      subtitle={\& its applications},
+      edition={Sixth Edition},
+      year={2011},
+      publisher={Addison-Wesley},
+      pages={766}
+    }
+  \end{biblist}
+\end{bibdiv}
+\end{document}
+  
+\end{document}
