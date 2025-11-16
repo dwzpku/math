@@ -14,6 +14,7 @@
 \usepackage{braket}
 
 \newcommand{\Emph}[1]{\textsf{\Large #1\ \ }}
+\newcommand{\Int}[1]{\left[#1\right]}
 
 \usepackage{amsthm}
 \renewcommand{\qedsymbol}{\tiny$\blacksquare$}
@@ -37,12 +38,13 @@
   {\thmname{#1}\thmnumber{ #2}\thmnote{. \ \itshape #3}}% Head spec
 \newqedtheoremstar{definition}{Definition}
 \newqedtheorem{theorem}{Theorem}[section]
+\newenvironment{solution}{\begin{proof}[解]}{\end{proof}}
 
 \usepackage{titlesec}
 \titleformat{\section}{\sffamily\Huge}{\thesection}{0.5em}{}
 \titleformat{\subsection}{\sffamily\bfseries\Large}{\thesubsection}{0.5em}{}
 \titleformat{\subsubsection}{\sffamily\bfseries\large}{}{0pt}{}
-\usepackage[scheme=plain,UTF8]{ctex}
+\usepackage[scheme=plain,UTF8,fontset=windows]{ctex}
 
 \usepackage{hyperref}
 \begin{document}
@@ -103,6 +105,235 @@ integers has a least element.
   one box contains two or more of the objects.
 \end{theorem}
 
+\begin{theorem}[The Dirichlet's Approximation Theorem]
+  If \(\alpha\) is a real number and \(n\) is a positive integer, then there
+  exist integers \(a\) and \(b\) with \(1\le a \le n\) such that
+  \(|a\alpha-b|<1/n\).
+\end{theorem}
+
+\subsubsection{Sequences}
+
+\begin{definition}
+  A \emph{geometric progression} is a sequence of the form \(a\),
+  \(ar\), \(ar^2\), ..., \(ar^k\), ..., where \(a\), the \emph{initial term}, and
+  \(r\), the \emph{common ratio}, are real numbers.
+\end{definition}
+
+\begin{definition}
+  A set is \emph{countable} if it is finite or it is infinite and there
+  exists a one-to-one correspondence between the set of positive
+  integers and the set. A set that is not countable is called
+  \emph{uncountable}.
+\end{definition}
+
+\begin{theorem}
+  The set of rational numbers is countable.
+\end{theorem}
+
+\subsection*{Exercises}
+
+\begin{itemize}
+\item [5.] Use the well-ordering property to show that \(\sqrt3\) is
+  irrational.
+  \begin{solution}
+    假设 \(\sqrt{N}=p/q\), 则 \(q\sqrt{N}=p\) 为整
+    数. 由 well-ordering 性质, 设 \(s\) 为整数集合
+    \[
+      Q=\Set{q\in \mathbb{Z}^+|q\sqrt{N}\in \mathbb{Z}^+}
+    \]
+    内最小正整数. 考虑
+    \(s'=\Set{\sqrt{N}}s=\sqrt{N}s-\Int{\sqrt{N}}s\in
+    \mathbb{Z}\) 非负. 而\(s'\sqrt{N}=sN-\Int{\sqrt{N}}s\sqrt{N}\) 也为非负整
+    数. 因为 \(\Set{\sqrt{N}}<1\), 所以 \(0\le s'<s\). 因 \(s\) 在 \(Q\) 中最小, 所
+    以 \(s'=0\). 即 \(\sqrt{N}\) 必须为整数.
+  \end{solution}
+\item[20.] Show that if \(m\) is a positive integer, then
+  \[
+    [mx]=[x[x+(1/m)]+[x+(2/m)]+\cdots+[x+(m-1)/m]
+  \]
+  whenever \(x\) is a real number.
+  \begin{solution}
+    令 \(mx=n+\alpha\), \(n=[mx]\), \(\alpha=\{mx\}\). 再令 \(n=mp+q\),
+    \(p=[n/m]\), \(0\le q<m\) 为非负整数. 考虑
+    \[
+      \sum_{k=0}^{m-1}[\alpha/m+k/m]=0.
+    \]
+    即
+    \[
+      \sum_{k=0}^{m-1}[x-n/m+k/m]=\sum_{k=0}^{m-1}[x-p-q/m+k/m]=0.
+    \]
+    计算
+    \begin{align*}
+      \sum_{k=0}^{q-1}[x-p-q/m+k/m]=&\sum_{k=0}^{n-1}\left\{ [x+1-q/m+k/m]-1 \right\}\\
+      =&\sum_{k=m-q}^{m-1}[x+k/m] - q(p+1), \\
+      \sum_{k=q}^{m-1}[x-p-q/m+k/m]=&\sum_{k=0}^{m-q-1}[x+k/m] - p(m-q).
+    \end{align*}
+    得
+    \[
+      \sum_{k=0}^{m-1}[x+k/m] =mp+q= n = [mx]. \qedhere
+    \]
+  \end{solution}
+\item Show that every positive integer occurs exactly once in the
+  spectrum sequence of \(\alpha\) or in the spectrum of \(\beta\) if and only if
+  \(\alpha\) and \(\beta\) are positive irrational numbers such that
+  \(1/\alpha+1/\beta=1\).
+  \begin{solution}
+    假设 \(1/\alpha+1/\beta=1\). 首先, 要使序列 \(m\alpha\) 和 \(m\beta\) 不相交,
+    \(\alpha\) 和 \(\beta\) 都必须是无理数. 然后, 对正整数 \(k\), 定义 \(N(k)\) 为序
+    列 \(m\alpha\) 和 \(m\beta\) 中小于 \(k\) 的项
+    数. 则 \(N(k)=[k/\alpha]+[k/\beta]\). 因 \(k/\alpha\) 和 \(k/\beta\) 均非整
+    数, 得 \(k/\alpha-1<[k/\alpha]<k\alpha\) 及
+    \(k/\beta-1<[k/\beta]<k/\beta\). 相加得 \(k-2<N(k)<k\). 这样 \(N(k)=k-1\).
+  \end{solution}
+\end{itemize}
+
+\subsection{Sums and Products}
+
+The following notation represents the sum of the numbers
+\(a_1,a_2, \ldots, a_n\):
+\[
+  \sum_{k=1}^na_k=a_1+a_2+ \cdots+a_n.
+\]
+
+The products of the numbers \(a_1,a_2, \ldots, a_n\) is denoted by
+\[
+  \prod_{j=1}^n a_j=a_1a_2 \cdots a_n.
+\]
+
+\subsection{Mathematical Induction}
+
+\begin{theorem}[The Principle of Mathematical Induction]\noqed
+  A set of positive integers that contains the integer \(1\), and that
+  has the property that, if it contains the integer \(k\), then it also
+  contains \(k+1\), must be the set of all positive integers.
+\end{theorem}
+\begin{proof}
+  The principle of mathematical induction follows from the
+  well-ordering principle.
+\end{proof}
+
+\begin{theorem}[The Second Principle of Mathematical Induction]
+  A set of positive integers that contains the integer \(1\), and that
+  has the property that, for every positive integer \(n\), if it
+  contains all the positive integers \(1,2,\ldots,n\), then it also contains
+  the integer \(n+1\), must be the set of all positive integers.
+\end{theorem}
+
+\subsubsection{Recursive Definition}
+
+\begin{definition}
+  We say that the function \(f\) is \emph{defined recursively} if the value
+  of \(f\) at \(1\) is specified and if for each positive integer
+  \(n\) a rule is provided for determining \(f(n+1)\) from \(f(n)\).
+\end{definition}
+
+The principle of mathematical induction can be used to show that a
+function that is defined uniquely at each positive integer.
+
+\subsection*{Exercises}
+
+\begin{itemize}
+\item [35.] A \emph{unit fraction} is a fraction of the form \(1/n\), where
+  \(n\) is a positive integer. Because the ancient Egyptian represented
+  fractions as sum of distinct unit fractions, such sums are called
+  \emph{Egyptian fractions}. Show that every rational number \(p/q\), where
+  \(p\) and \(q\) are integers with \(0<p<q\), can be written as a sum of
+  distinct unit fractions, that is, as an Egyptian fraction.
+  \begin{proof}
+    命题在 \(p=1\) 时显然真. 我们对 \(p\) 作强递推. 设命题对 \(p<n\) 的所有分
+    数 \(0<p/q<1\)都成立. \(p=n>1\) 时, 设 \(1/s\) 为小于 \(p/q\) 的最大单位分
+    数, 则 \(1/(s-1)>p/q>1/s\). 相减得剩余分数 \(p/q-1/s=(ps-q)/qs\). 由不
+    等式得 \(ps-q>0\) 和 \(p(s-1)-q<0\). 因此剩余分数的分子 \(ps-q<p=n\).
+  \end{proof}
+\end{itemize}
+
+\subsection{The Fibonacci Numbers}
+
+\begin{definition}
+  The \emph{Fibonacci sequence} is defined recursively by \(f_1=1\),
+  \(f_2=1\), and \(f_n=f_{n-1}+f_{n-2}\) for \(n\ge 3\). The terms of this
+  sequence are called the \emph{Fibonacci numbers}.
+\end{definition}
+
+\subsubsection{How Fast Do the Fibonacci Numbers Grow?}
+
+\begin{theorem}
+  Let \(n\) be a positive integer and let
+  \(\alpha=\frac{1+\sqrt5}{2}\) and
+  \(\beta=\frac{1-\sqrt5}{2}\). Then the \(n\)th Fibonacci number
+  \(f_n\) is given by
+  \[
+    f_n=\frac1{\sqrt5}(\alpha^n-\beta^n). \qedhere
+  \]
+\end{theorem}
+
+\subsubsection*{Computations and Explorations}
+
+\begin{itemize}
+\item [7.] A surprising theorem states that the Fibonacci numbers are
+  the positive values of the polynomial
+  \(2xy^4+x^2y^3-2x^3y^2-y^5-x^4y+2y\) as \(x\) and \(y\) range over all
+  nonnegative integers.\cite{Jones75}
+\end{itemize}
+
+\subsection{Divisibility}
+
+\begin{definition}
+  If \(a\) and \(b\) are integers with \(a\ne0\), we say that \(a\) \emph{devides}
+  \(b\) if there is an integer \(c\) such that \(b=ac\). If \(a\) divides
+  \(b\), we also say that \(a\) is a \emph{divisor} or \emph{factor} of
+  \(b\) and that \(b\) is a \emph{multiple} of \(a\).
+\end{definition}
+
+\begin{theorem}
+  If \(a,b\) and \(c\) are integers with \(a\mid b\) and \(b\mid c\), then \(a\mid c\).
+\end{theorem}
+
+\begin{theorem}
+  If \(a,b,m\), and \(n\) are integers, and if \(c\mid a\) and
+  \(c\mid b\), then \(c\mid(ma+nb)\).
+\end{theorem}
+
+\begin{theorem}[The Division Algorithm]
+  If \(a\) and \(b\) are integers such that \(b>0\), then there are unique
+  integers \(q\) and \(r\) such that \(a=bq+r\) with \(0\le r<b\).
+\end{theorem}
+
+\begin{definition}
+  If the remainder when \(n\) is divided by \(2\) is \(0\), then
+  \(n=2k\) for some integer \(k\), and we say that \(n\) is \emph{even}, whereas
+  if the remainder when \(n\) is divided by \(2\) is \(1\), then
+  \(n=2k+1\) for some integer \(k\), and we say that \(n\) is \emph{odd}.
+\end{definition}
+
+\subsubsection{Greatest Common Divisors}
+
+\begin{definition}
+  The \emph{greatest common divisor} of two integers \(a\) and \(b\), which
+  are not both \(0\), is the largest integer that divides both \(a\) and
+  \(b\).
+\end{definition}
+
+\begin{definition}
+  The integers \(a\) and \(b\), with \(a\ne0\) and \(b\ne0\), are \emph{relatively
+    prime} if \(a\) and \(b\) have greatest common divisor \((a,b)=1\).
+\end{definition}
+
+\section{Integer Representations and Operations}
+
+\subsection{Representations of Integers}
+
+\begin{theorem}
+  Let \(b\) be a positive integers with \(b>1\). Then every positive
+  integer \(n\) can be written uniquely in the form
+  \[
+    n=a_kb^k+a_{k-1}b^{k-1}+\cdots+a_1b+a_0,
+  \]
+  where \(k\) is a nonnegative integer, \(a_j\) is an integer with
+  \(0\le a_j\le b-1\) for \(j=0,1,\ldots,k\), and the initial coefficient
+  \(a_k\ne0\).
+\end{theorem}
+
 
 %%%%%%%%%%%%%%%%%%%%%% References %%%%%%%%%%%%%%%%%%%%%%%% 
 
@@ -116,6 +347,16 @@ integers has a least element.
       year={2011},
       publisher={Addison-Wesley},
       pages={766}
+    }
+    \bib{Jones75}{article}{
+      author={Jones, James P.},
+      title={Diophantine Representation of the Fibonacci Numbers},
+      year={1975},
+      journal={The Fibonacci Quarterly},
+      volume={13},
+      number={1},
+      pages={84--88},
+      publisher={The Fibonacci Association}
     }
   \end{biblist}
 \end{bibdiv}
