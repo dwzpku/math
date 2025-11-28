@@ -13,7 +13,7 @@
 \usepackage{bm}
 \usepackage{braket}
 
-\newcommand{\Emph}[1]{\textsf{\Large #1\ \ }}
+\newcommand{\Emph}[1]{\noindent\textsf{\Large #1\ \ }}
 \newcommand{\Int}[1]{\left[#1\right]}
 
 \usepackage{amsthm}
@@ -37,7 +37,9 @@
   {1.0em}%        Space after head
   {\thmname{#1}\thmnumber{ #2}\thmnote{. \ \itshape #3}}% Head spec
 \newqedtheoremstar{definition}{Definition}
+\newqedtheorem{lemma}{Lemma}[section]
 \newqedtheorem{theorem}{Theorem}[section]
+\newqedtheorem{corollary}{Corollary}[theorem]
 \newenvironment{solution}{\begin{proof}[解]}{\end{proof}}
 
 \usepackage{titlesec}
@@ -334,6 +336,127 @@ function that is defined uniquely at each positive integer.
   \(a_k\ne0\).
 \end{theorem}
 
+\begin{corollary}
+  Every positive integer may be represented as the sum of distinct
+  powers of \(2\).
+\end{corollary}
+
+\subsection{Computer Operations with Integers}
+
+\begin{definition}
+  An \emph{algorithm} is a finite set of precise instructions for
+  performing a computation or for solving a problem.
+\end{definition}
+
+\subsection{Complexity of Integer Operations}
+
+\begin{definition}
+  If \(f\) and \(g\) are functions taking positive values, defined for all
+  \(x\in S\), where \(S\) is a specified set of real numbers, then
+  \(f\) is \(O(g)\) if there is a positive constant \(K\) such that
+  \(f(x)<Kg(x)\) for all sufficiently large \(x\in S\). (Normally, we take
+  \(S\) to be the set of positive integers, and we drop all reference to
+  \(S\).)
+\end{definition}
+
+\begin{theorem}
+  If \(f\) is \(O(g)\) and \(c\) is a positive constant, then \(cf\) is \(O(g)\).
+\end{theorem}
+
+\begin{theorem}
+  If \(f_1\) is \(O(g_1)\) and \(f_2\) is \(O(g_2)\), then \(f_1+f_2\) is
+  \(O(g_1+g_2)\), and \(f_1f_2\) is \(O(g_1g_2)\).
+\end{theorem}
+
+\begin{corollary}
+  If \(f_1\) and \(f_2\) are \(O(g)\), then \(f_1+f_2\) is \(O(g)\).
+\end{corollary}
+
+\begin{theorem}
+  Multiplication of two \(n\)-bit integers can be performed using
+  \(O(n^{\log_23})\) bit operations.
+\end{theorem}
+
+\begin{theorem}
+  Given a positive number \(\epsilon>0\), there is an algorithm for
+  multiplication of two \(n\)-bit integers using \(O(n^{1+\epsilon})\) bit
+  operations.
+\end{theorem}
+
+\begin{theorem}
+  There is an algorithm to multiply two \(n\)-bit integers using
+  \(O(n\log_2n\log_2\log_2n)\) bit operations.
+\end{theorem}
+
+\begin{theorem}
+  There is an algorithm to find the quotient \(q=[a/b]\), when the
+  \(2n\)-bit integer \(a\) is divided by the integer \(b\) (having no more
+  than \(n\) bits), using \(O(M(n))\) bit operations, where \(M(n)\) is the
+  number of bit operations needed to multiply two \(n\)-bit integers.
+\end{theorem}
+
+\section{Primes and Greatest Common Divisors}
+
+\subsection{Prime Numbers}
+
+\begin{definition}
+  A \emph{prime} is an integer greater than \(1\) that is divisible by no
+  positive integers other than \(1\) and itself.
+\end{definition}
+
+\begin{definition}
+  An integer greater than \(1\) that is not prime is called
+  \emph{composite}.
+\end{definition}
+
+\Emph{The Infinitude of Primes}
+
+\begin{lemma}
+  Every integer greater than \(1\) has a prime divisor.
+\end{lemma}
+
+\begin{theorem}
+  There are infinitely many primes.
+\end{theorem}
+
+\Emph{Finding Primes}
+
+\begin{theorem}
+  If \(n\) is a composite integer, then \(n\) has a prime factor not
+  exceeding \(\sqrt{n}\).
+\end{theorem}
+
+\begin{definition}
+  The function \(\pi(x)\), where \(x\) is a positive real number, denotes
+  the number of prime not exceeding \(x\).
+\end{definition}
+
+\begin{theorem}[Dirichlet's Theorem on Primes in Arithmetic Progressions]
+  Suppose that \(a\) and \(b\) are relatively prime positive
+  integers. Then the arithmetic progression \(an+b\),
+  \(n=1,2,3,\ldots\), contains infinitely many primes.
+\end{theorem}
+\begin{proof}
+  See ref.~\cite{Varilly15}.
+\end{proof}
+
+\Emph{The Largest Known Primes} Primes of the form \(2^p-1\), where
+\(p\) is prime, are called \emph{Mersenne primes}. Currently, the world
+record for the largest prime known is \(2^{43,112,609}-1\).
+
+\subsection*{Exercises}
+
+\begin{itemize}
+\item[29.] Show that if \(f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\), where
+  \(n\ge1\) and the coefficients are integers, then there is a positive
+  integer \(y\) such that \(f(y)\) is composite. (\emph{Hint}: Assume that
+  \(f(x)=p\) is prime, and show that \(p\) divides \(f(x+kp)\) for all
+  integers \(k\). Conclude that there in an integer \(y\) such that
+  \(f(y)\) is composite from the fact that a polynomial of degree
+  \(n\), \(n>1\), takes on each value at most \(n\) times.)
+\end{itemize}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%% References %%%%%%%%%%%%%%%%%%%%%%%% 
 
@@ -358,8 +481,12 @@ function that is defined uniquely at each positive integer.
       pages={84--88},
       publisher={The Fibonacci Association}
     }
+    \bib{Varilly15}{webpage}{
+      author={Anthony V\'arilly},
+      title={Dirichlet's Theorem on Arithmetic Progressions},
+      url={https://math.rice.edu/~av15/Files/Dirichlet.pdf}
+    }
   \end{biblist}
 \end{bibdiv}
-\end{document}
   
 \end{document}
